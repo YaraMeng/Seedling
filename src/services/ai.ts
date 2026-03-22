@@ -2,7 +2,7 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Category } from "../types";
 
 // 修正后的代码
-const ai = new GoogleGenAI(import.meta.env.VITE_GEMINI_API_KEY || "");
+const ai = new GoogleGenAI(import.meta.env.VITE_GOOGLE_AI_API_KEY || "");
 
 export async function generateMetadata(input: { text?: string; file?: { mimeType: string; data: string } }, existingCategories: Category[]) {
   const categoryTree = existingCategories.map(c => ({ id: c.id, name: c.name, parentId: c.parentId }));
