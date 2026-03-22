@@ -2,7 +2,17 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Category } from "../types";
 
 // 修正后的代码
-const ai = new GoogleGenAI(import.meta.env.VITE_GOOGLE_AI_API_KEY || "");
+// const ai = new GoogleGenAI(import.meta.env.VITE_GOOGLE_AI_API_KEY || "");
+
+const keyFromEnv = import.meta.env.VITE_GOOGLE_AI_API_KEY;
+
+if (!keyFromEnv) {
+  // 如果拿不到 Key，在页面标题上显示出来，方便我们一眼看到
+  document.title = "DEBUG: Key is Missing!"; 
+  console.log("环境变量内容：", import.meta.env); // 打印出所有能拿到的环境变量
+}
+
+const ai = new GoogleGenAI(keyFromEnv || "DUMMY_KEY_TO_PREVENT_CRASH");
 
 export async function generateMetadata(input: { text?: string; file?: { mimeType: string; data: string } }, existingCategories: Category[]) {
   const categoryTree = existingCategories.map(c => ({ id: c.id, name: c.name, parentId: c.parentId }));
