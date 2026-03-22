@@ -9,6 +9,7 @@ const keyFromEnv = import.meta.env.VITE_GOOGLE_AI_API_KEY;
 if (!keyFromEnv) {
   // 如果拿不到 Key，在页面标题上显示出来，方便我们一眼看到
   document.title = "DEBUG: Key is Missing!"; 
+  console.error("Critical: VITE_GOOGLE_AI_API_KEY is missing!");
   console.log("环境变量内容：", import.meta.env); // 打印出所有能拿到的环境变量
 }
 
