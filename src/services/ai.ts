@@ -13,7 +13,7 @@ if (!keyFromEnv) {
   console.log("环境变量内容：", import.meta.env); // 打印出所有能拿到的环境变量
 }
 
-const ai = new GoogleGenAI(keyFromEnv || "DUMMY_KEY_TO_PREVENT_CRASH");
+const ai = new GoogleGenAI({ apiKey: keyFromEnv });
 
 export async function generateMetadata(input: { text?: string; file?: { mimeType: string; data: string } }, existingCategories: Category[]) {
   const categoryTree = existingCategories.map(c => ({ id: c.id, name: c.name, parentId: c.parentId }));
